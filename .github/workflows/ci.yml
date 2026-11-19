@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        id: py
+        with:
+          python-version: '3.11'
+      - name: OSS CAD Suite (Icarus, Verilator, Yosys, SymbiYosys)
+        uses: YosysHQ/oss-cad-suite-build/action@v1
+      - name: Python environment
+        run: |
+          ${{ steps.py.outputs.python-path }} -m venv /tmp/hw-portfolio-venv
+          /tmp/hw-portfolio-venv/bin/pip install -q -r requirements.txt
+      - name: ./run.sh
+        run: |
+          source /tmp/hw-portfolio-venv/bin/activate
+          ./run.sh
