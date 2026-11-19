@@ -16,7 +16,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: OSS CAD Suite (Icarus, Verilator, Yosys, SymbiYosys)
-        uses: YosysHQ/oss-cad-suite-build/action@v1
+        uses: YosysHQ/setup-oss-cad-suite@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Python environment
         run: |
           ${{ steps.py.outputs.python-path }} -m venv /tmp/hw-portfolio-venv
