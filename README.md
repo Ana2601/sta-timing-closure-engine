@@ -13,6 +13,8 @@ OpenSTA required:
 3. **Close timing** by retiming (pipelining) and show the closing period
    shrinking ~linearly with pipeline depth.
 
+![Architecture](docs/diagrams/architecture.svg)
+
 ## What the STA engine does
 
 `sta.py` reads yosys `write_json` gate netlists (bit-level `$_*_` cells) and:
@@ -102,6 +104,12 @@ Makefile / run.sh      one-command flow
 make addchain STAGES=4   # or synth a specific retiming config
 python3 sta.py --json /tmp/addchain_4.json --sweep
 ```
+
+## Test run
+
+Output of the CI command (`./run.sh`), captured from a local run:
+
+![Test run](docs/screenshots/test_run.svg)
 
 ## Setup
 
